@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astrolite Tech Solutions - Employee Offboarding</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --background-color: #f4f6f7;
+            --text-color: #2c3e50;
+            --error-color: #e74c3c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            position: relative;
+        }
+
+        body::before {
+            content: 'ATS - TECH SOLUTIONS';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 5vw;
+            color: rgba(52, 152, 219, 0.05);
+            z-index: -1;
+            white-space: nowrap;
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 150px;
+            height: 70px;
+            border-radius: 45%;
+        }
+
+        /* Remove spinner for Contact Number input */
+        #contactNumber::-webkit-inner-spin-button,
+        #contactNumber::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        #contactNumber {
+            -moz-appearance: textfield;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            animation: fadeIn 0.5s ease-out;
+            position: relative;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            background-color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            padding: 20px;
+            padding-bottom: 20px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            padding-bottom: 10px;
+            display: inline;
+            align-items: center;
+        }
+        
+        h2 i {
+            margin-right: 0px;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        
+        .section {
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        .error {
+            color: var(--error-color);
+            font-size: 0.8em;
+            margin-top: 5px;
+            display: none;
+            animation: errorShake 0.5s;
+        }
+        
+        textarea {
+            resize: none;
+        }
+
+        @keyframes errorShake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        .error-input {
+            border-color: var(--error-color);
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+            accent-color: var(--secondary-color);
+        }
+
+        .checkbox-container label {
+            flex-grow: 1;
+            margin-bottom: 0;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .navigation button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        #prevBtn {
+            background-color: #f1f3f4;
+            color: var(--text-color);
+        }
+
+        #nextBtn, #submitBtn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .navigation button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .file-upload {
+            border: 2px dashed #e0e0e0;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload:hover {
+            background-color: rgba(52, 152, 219, 0.05);
+            border-color: var(--primary-color);
+        }
+
+        .file-list {
+            margin-top: 15px;
+        }
+
+        .remove-file {
+            color: var(--error-color);
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .info-icon {
+            margin-left: 5px;
+            color: var(--primary-color);
+            cursor: pointer;
+            position: relative;
+            margin-top: -5px;
+        }
+
+        .tooltip {
+            visibility: hidden;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 5px 10px;
+            border-radius: 6px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            white-space: nowrap;
+        }
+
+        .info-icon:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .label-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .next-btn-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .star {
+            color: var(--error-color);
+            font-size: large;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            .navigation {
+                flex-direction: column;
+            }
+
+            .navigation button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            h1 {
+                font-size: 1rem;
+                margin-top: 10px;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>EMPLOYEE OFFBOARDING FORM</h1>
+        <form id="offboardingForm">
+            <!-- Personal Details Section -->
+            <div class="section active" id="personal">
+                <h2><i class="fas fa-user-circle"></i> Personal Details</h2>
+                <div class="form-group">
+                    <label for="fullName">Full Name <span class="star">*</span></label>
+                    <input type="text" id="fullName" minlength="5" maxlength="50" required>
+                    <div class="error" id="fullNameError" data-default="Please enter a valid full name (5-50 characters)">Please enter a valid full name (5-50 characters)</div>
+                </div>
+                <div class="form-group">
+                    <div class="label-container">
+                        <label for="empId">Employee ID <span class="star">*</span></label>
+                        <span class="info-icon">
+                            <i class="fas fa-info-circle"></i>
+                            <span class="tooltip">Employee ID format: ATS0XXX</span>
+                        </span>
+                    </div>
+                    <input type="text" id="empId" minlength="7" maxlength="7" required>
+                    <div class="error" id="empIdError" data-default="Please enter a valid employee ID (ATS0XXX format)">Please enter a valid employee ID (ATS0XXX format)</div>
+                </div>
+                <div class="form-group">
+                    <label for="position">Role <span class="star">*</span></label>
+                    <input type="text" id="position" minlength="5" maxlength="50" required>
+                    <div class="error" id="positionError" data-default="Please enter your job position (5-50 characters)">Please enter your job position (5-50 characters)</div>
+                </div>
+                <div class="form-group">
+                    <label for="department">Department <span class="star">*</span></label>
+                    <input type="text" id="department" minlength="5" maxlength="50" required>
+                    <div class="error" id="departmentError" data-default="Please enter your department (5-50 characters)">Please enter your department (5-50 characters)</div>
+                </div>
+                <div class="form-group">
+                    <label for="lastDay">Last Working Day <span class="star">*</span></label>
+                    <input type="date" id="lastDay" required>
+                    <div class="error" id="lastDayError" data-default="Please select a valid date within the next 2 months">Please select a valid date within the next 2 months</div>
+                </div>
+                <div class="form-group">
+                    <label for="contactNumber">Contact Number <span class="star">*</span></label>
+                    <input type="number" id="contactNumber" minlength="10" maxlength="10" required>
+                    <div class="error" id="contactNumberError" data-default="Please enter a valid contact number">Please enter a valid contact number</div>
+                </div>
+                <div class="form-group">
+                    <label for="personalEmail">Personal Email <span class="star">*</span></label>
+                    <input type="email" id="personalEmail" required>
+                    <div class="error" id="personalEmailError" data-default="Please enter a valid email address">Please enter a valid email address</div>
+                </div>
+                <div class="next-btn-container">
+                    <button type="button" id="personalNextBtn" class="next-btn">Next <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Project Handover Section -->
+            <div class="section" id="projects">
+                <h2><i class="fas fa-project-diagram"></i> Project Handover</h2>
+                <div class="form-group">
+                    <label for="activeProjects">Active Projects <span class="star">*</span></label>
+                    <textarea id="activeProjects" rows="4" minlength="10" maxlength="300" required></textarea>
+                    <div class="error" id="activeProjectsError" data-default="Please list your active projects (10-300 characters)">Please list your active projects (10-300 characters)</div>
+                </div>
+                <div class="form-group">
+                    <label for="handoverPerson">Handover Person <span class="star">*</span></label>
+                    <input type="text" id="handoverPerson" minlength="5" maxlength="50" required>
+                    <div class="error" id="handoverPersonError" data-default="Please specify the handover person (5-50 characters)">Please specify the handover person (5-50 characters)</div>
+                </div>
+                <div class="form-group">
+                    <label>Project Documentation <span class="star">*</span></label>
+                    <div class="file-upload" id="projectDocUpload">
+                        <p>Drag and drop files or click to upload (Max 5 files, 5MB each)</p>
+                        <input type="file" id="projectDocs" multiple style="display:none;" required>
+                    </div>
+                    <div class="error" id="projectDocsError" data-default="Please upload at least one project documentation file">Please upload at least one project documentation file</div>
+                    <div class="file-list" id="projectDocsList"></div>
+                </div>
+            </div>
+
+            <!-- Company Assets Section -->
+            <div class="section" id="assets">
+                <h2><i class="fas fa-laptop"></i> Company Assets</h2>
+                <div class="form-group">
+                    <label>Hardware Items</label>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="laptop" name="assets">
+                        <label for="laptop">Laptop</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="monitor" name="assets">
+                        <label for="monitor">Monitor</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="phone" name="assets">
+                        <label for="phone">Company Phone</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="accessCard" name="assets">
+                        <label for="accessCard">Access Card</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="others" name="assets">
+                        <label for="others">Others</label>
+                    </div>
+                    <div class="error" id="assetsError" data-default="Please select at least 4 assets or specify 'Others'">Please select at least 4 assets or specify "Others"</div>
+                </div>
+                <div class="form-group" id="additionalAssetsContainer" style="display:none;">
+                    <label for="additionalAssets">Additional Assets</label>
+                    <textarea id="additionalAssets" rows="3" minlength="10" maxlength="300"></textarea>
+                    <div class="error" id="additionalAssetsError" data-default="Please describe additional assets (min 10 alphabetical characters, max 300 characters)">Please describe additional assets (min 10 alphabetical characters, max 300 characters)</div>
+                </div>
+            </div>
+
+            <!-- Documentation Section -->
+            <div class="section" id="documents">
+                <h2><i class="fas fa-file-alt"></i> Documentation</h2>
+                <div class="form-group">
+                    <label for="repositories">Code Repositories <span class="star">*</span></label>
+                    <textarea id="repositories" rows="3" minlength="5" maxlength="300" required></textarea>
+                    <div class="error" id="repositoriesError" data-default="Please list all code repositories (5-300 characters)">Please list all code repositories (5-300 characters)</div>
+                </div>
+                <div class="form-group">
+                    <label for="accessCredentials">Access Credentials <span class="star">*</span></label>
+                    <textarea id="accessCredentials" rows="3" minlength="5" maxlength="300" required></textarea>
+                    <div class="error" id="accessCredentialsError" data-default="Please list all access credentials (5-300 characters)">Please list all access credentials (5-300 characters)</div>
+                </div>
+                <div class="form-group">
+                    <label for="knowledgeBase">Knowledge Base Articles <span class="star">*</span></label>
+                    <textarea id="knowledgeBase" rows="3" minlength="5" maxlength="300" required></textarea>
+                    <div class="error" id="knowledgeBaseError" data-default="Please list relevant knowledge base articles (5-300 characters)">Please list relevant knowledge base articles (5-300 characters)</div>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="dataPrivacyConsent" style="margin-bottom: 50px;" required>
+                        <label for="dataPrivacyConsent">I consent to the transfer and processing of my personal information as part of the offboarding process. I understand that my data will be handled in compliance with company policies and applicable data protection regulations.</label>
+                    </div>
+                    <div class="error" id="dataPrivacyConsentError" data-default="Please provide consent to proceed">Please provide consent to proceed</div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="navigation">
+                <button type="button" id="prevBtn" style="display:none;"><i class="fas fa-arrow-left"></i> Previous</button>
+                <button type="button" id="nextBtn" style="display:none;">Next <i class="fas fa-arrow-right"></i></button>
+                <button type="submit" id="submitBtn" style="display:none;">Submit Offboarding</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = ['personal', 'projects', 'assets', 'documents'];
+            let currentSectionIndex = 0;
+            let uploadedFiles = {
+                projectDocs: []
+            };
+
+            const lastDayInput = document.getElementById('lastDay');
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // Normalize to start of day
+            const tomorrow = new Date(today);
+            tomorrow.setDate(today.getDate() + 1);
+            const maxDate = new Date(today);
+            maxDate.setMonth(today.getMonth() + 2); // Set max date to 2 months from today
+
+            const formatDate = (date) => {
+                return date.toISOString().split('T')[0];
+            };
+
+            // Set min and max attributes for the date picker
+            lastDayInput.min = formatDate(tomorrow);
+            lastDayInput.max = formatDate(maxDate);
+
+            const form = document.getElementById('offboardingForm');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const personalNextBtn = document.getElementById('personalNextBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            const additionalAssetsContainer = document.getElementById('additionalAssetsContainer');
+            const othersCheckbox = document.getElementById('others');
+            const assetsCheckboxes = document.querySelectorAll('input[name="assets"]');
+            const assetsError = document.getElementById('assetsError');
+            const projectDocsList = document.getElementById('projectDocsList');
+
+            personalNextBtn.style.backgroundColor = 'var(--primary-color)';
+            personalNextBtn.style.color = 'white';
+            personalNextBtn.style.padding = '12px 25px';
+            personalNextBtn.style.border = 'none';
+            personalNextBtn.style.borderRadius = '8px';
+            personalNextBtn.style.cursor = 'pointer';
+            personalNextBtn.style.transition = 'all 0.3s ease';
+            personalNextBtn.style.fontWeight = '600';
+
+            // Function to check for duplicates via API
+            const checkForDuplicates = async (field, value) => {
+                try {
+                    const response = await fetch('http://localhost:3000/api/offboarding/check-duplicate', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ field, value })
+                    });
+                    const result = await response.json();
+                    return result.isDuplicate;
+                } catch (error) {
+                    console.error('Error checking duplicates:', error);
+                    return false;
+                }
+            };
+
+            const validations = {
+                countAlphabeticChars: (value) => {
+                    return value.replace(/[^a-zA-Z]/g, '').length;
+                },
+
+                hasAlphabeticChar: (value) => {
+                    return /[a-zA-Z]/.test(value);
+                },
+
+                fullName: (value) => {
+                    const alphaCount = validations.countAlphabeticChars(value);
+                    return alphaCount >= 5 && /^[a-zA-Z\s]+$/.test(value.trim()) && validations.hasAlphabeticChar(value);
+                },
+
+                empId: async (value) => {
+                    const isFormatValid = /^ATS0(?!000)\d{3}$/.test(value);
+                    const isDuplicate = await checkForDuplicates('empId', value);
+                    return isFormatValid && !isDuplicate;
+                },
+
+                position: (value) => {
+                    const alphaCount = validations.countAlphabeticChars(value);
+                    return alphaCount >= 5 && /^[a-zA-Z\s]+$/.test(value.trim()) && validations.hasAlphabeticChar(value);
+                },
+
+                department: (value) => {
+                    const alphaCount = validations.countAlphabeticChars(value);
+                    return alphaCount >= 5 && /^[a-zA-Z\s]+$/.test(value.trim()) && validations.hasAlphabeticChar(value);
+                },
+
+                lastDay: (value) => {
+                    if (!value) return false;
+                    const yearMatch = /^\d{4}-\d{2}-\d{2}$/.test(value);
+                    if (!yearMatch) return false;
+                    const selectedDate = new Date(value);
+                    if (isNaN(selectedDate.getTime())) return false;
+                    return selectedDate >= tomorrow && selectedDate <= maxDate;
+                },
+
+                contactNumber: async (value) => {
+                    const isFormatValid = /^\d{10}$/.test(value);
+                    const isDuplicate = await checkForDuplicates('contactNumber', value);
+                    return isFormatValid && !isDuplicate;
+                },
+
+                personalEmail: async (value) => {
+                    const [localPart, domain] = value.split('@');
+                    if (!localPart || !domain) return false;
+
+                    const alphaNumCount = localPart.replace(/[^a-zA-Z0-9]/g, '').length;
+                    const validLocalPartLength = localPart.length >= 5 && localPart.length <= 25;
+                    const validLocalPartChars = /^[a-zA-Z0-9_.]+$/.test(localPart);
+                    const noConsecutiveSpecial = !/[_]{2,}|\.\.+/g.test(localPart);
+                    const noAdjacentSpecial = !/[_][.]|[.][_]/.test(localPart);
+                    const validAlphaNumCount = alphaNumCount >= 5;
+
+                    const validDomain = domain === 'gmail.com' || domain === 'yahoo.com' || domain === 'outlook.com';
+
+                    const isDuplicate = await checkForDuplicates('personalEmail', value);
+                    return validLocalPartLength && validLocalPartChars && noConsecutiveSpecial && noAdjacentSpecial && validAlphaNumCount && validDomain && !isDuplicate;
+                },
+
+                activeProjects: (value) => {
+                    const alphaCount = validations.countAlphabeticChars(value);
+                    return alphaCount >= 10 && value.trim().length <= 300 && validations.hasAlphabeticChar(value);
+                },
+
+                handoverPerson: (value) => {
+                    const alphaCount = validations.countAlphabeticChars(value);
+                    return alphaCount >= 5 && /^[a-zA-Z\s]+$/.test(value.trim()) && validations.hasAlphabeticChar(value);
+                },
+
+                assets: () => {
+                    const checkedAssets = document.querySelectorAll('input[name="assets"]:checked');
+                    const othersChecked = document.getElementById('others').checked;
+
+                    if (othersChecked) {
+                        const additionalAssets = document.getElementById('additionalAssets').value.trim();
+                        return validations.additionalAssets(additionalAssets);
+                    }
+
+                    return checkedAssets.length >= 4;
+                },
+
+                additionalAssets: (value) => {
+                    const othersChecked = document.getElementById('others').checked;
+                    if (!othersChecked) return true;
+                    const alphaCount = validations.countAlphabeticChars(value);
+                    return alphaCount >= 10 && value.trim().length <= 300 && validations.hasAlphabeticChar(value);
+                },
+
+                repositories: (value) => {
+                    const alphaCount = validations.countAlphabeticChars(value);
+                    return alphaCount >= 5 && value.trim().length <= 300 && validations.hasAlphabeticChar(value);
+                },
+
+                accessCredentials: (value) => {
+                    const alphaCount = validations.countAlphabeticChars(value);
+                    return alphaCount >= 5 && value.trim().length <= 300 && validations.hasAlphabeticChar(value);
+                },
+
+                knowledgeBase: (value) => {
+                    const alphaCount = validations.countAlphabeticChars(value);
+                    return alphaCount >= 5 && value.trim().length <= 300 && validations.hasAlphabeticChar(value);
+                },
+
+                projectDocs: () => {
+                    return uploadedFiles.projectDocs.length > 0;
+                },
+
+                dataPrivacyConsent: (value) => {
+                    return value === true;
+                }
+            };
+
+            function showError(inputId, show = true, customMessage = '') {
+                const errorElement = document.getElementById(`${inputId}Error`);
+                const inputElement = document.getElementById(inputId);
+
+                if (errorElement) {
+                    if (customMessage) {
+                        errorElement.textContent = customMessage;
+                    } else {
+                        errorElement.textContent = errorElement.getAttribute('data-default') || errorElement.textContent;
+                    }
+                    errorElement.style.display = show ? 'block' : 'none';
+                }
+
+                if (inputElement) {
+                    inputElement.classList.toggle('error-input', show);
+                }
+            }
+
+            function validateAssets() {
+                const checkedAssets = document.querySelectorAll('input[name="assets"]:checked');
+                const othersChecked = document.getElementById('others').checked;
+
+                let isValid = true;
+
+                assetsError.style.display = 'none';
+
+                if (!othersChecked && checkedAssets.length < 4) {
+                    assetsError.style.display = 'block';
+                    isValid = false;
+                }
+
+                if (othersChecked) {
+                    const additionalAssetsValue = document.getElementById('additionalAssets').value.trim();
+                    const additionalAssetsValid = validations.additionalAssets(additionalAssetsValue);
+                    showError('additionalAssets', !additionalAssetsValid);
+                    isValid = isValid && additionalAssetsValid;
+                }
+
+                return isValid;
+            }
+
+            assetsCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    validateAssets();
+                    if (this.id === 'others') {
+                        additionalAssetsContainer.style.display = this.checked ? 'block' : 'none';
+                        if (!this.checked) {
+                            document.getElementById('additionalAssets').value = '';
+                            showError('additionalAssets', false);
+                        }
+                    }
+                });
+            });
+
+            document.getElementById('additionalAssets').addEventListener('input', validateAssets);
+
+            async function validateSection(sectionId) {
+                let isValid = true;
+                const failingFields = [];
+
+                switch(sectionId) {
+                    case 'personal':
+                        for (const field of ['fullName', 'empId', 'position', 'department', 'lastDay', 'contactNumber', 'personalEmail']) {
+                            const input = document.getElementById(field);
+                            const value = input ? input.value.trim() : '';
+                            let fieldValid;
+
+                            if (field === 'lastDay') {
+                                fieldValid = value && await validations[field](value);
+                            } else {
+                                fieldValid = await validations[field](value);
+                            }
+
+                            let errorMessage = '';
+                            if (!fieldValid) {
+                                if (field === 'empId' && await checkForDuplicates('empId', value)) {
+                                    errorMessage = 'This Employee ID is already used.';
+                                } else if (field === 'contactNumber' && await checkForDuplicates('contactNumber', value)) {
+                                    errorMessage = 'This Contact Number is already used.';
+                                } else if (field === 'personalEmail' && await checkForDuplicates('personalEmail', value)) {
+                                    errorMessage = 'This Email Address is already used.';
+                                }
+                            }
+
+                            showError(field, !fieldValid, errorMessage);
+                            if (!fieldValid) {
+                                failingFields.push(field);
+                            }
+                            isValid = isValid && fieldValid;
+                        }
+                        break;
+
+                    case 'projects':
+                        ['activeProjects', 'handoverPerson'].forEach(field => {
+                            const value = document.getElementById(field).value.trim();
+                            const fieldValid = validations[field](value);
+                            showError(field, !fieldValid);
+                            if (!fieldValid) {
+                                failingFields.push(field);
+                            }
+                            isValid = isValid && fieldValid;
+                        });
+                        const projectDocsValid = validations.projectDocs();
+                        showError('projectDocs', !projectDocsValid);
+                        if (!projectDocsValid) {
+                            failingFields.push('projectDocs');
+                        }
+                        isValid = isValid && projectDocsValid;
+                        break;
+
+                    case 'assets':
+                        const assetsValid = validations.assets();
+                        showError('assets', !assetsValid);
+                        if (!assetsValid) {
+                            failingFields.push('assets');
+                        }
+                        isValid = assetsValid;
+                        if (othersCheckbox.checked) {
+                            const additionalAssetsValue = document.getElementById('additionalAssets').value.trim();
+                            const additionalAssetsValid = validations.additionalAssets(additionalAssetsValue);
+                            showError('additionalAssets', !additionalAssetsValid);
+                            if (!additionalAssetsValid) {
+                                failingFields.push('additionalAssets');
+                            }
+                            isValid = isValid && additionalAssetsValid;
+                        }
+                        break;
+
+                    case 'documents':
+                        ['repositories', 'accessCredentials', 'knowledgeBase'].forEach(field => {
+                            const value = document.getElementById(field).value.trim();
+                            const fieldValid = validations[field](value);
+                            showError(field, !fieldValid);
+                            if (!fieldValid) {
+                                failingFields.push(field);
+                            }
+                            isValid = isValid && fieldValid;
+                        });
+                        const dataPrivacyConsent = document.getElementById('dataPrivacyConsent').checked;
+                        showError('dataPrivacyConsent', !dataPrivacyConsent);
+                        if (!dataPrivacyConsent) {
+                            failingFields.push('dataPrivacyConsent');
+                        }
+                        isValid = isValid && dataPrivacyConsent;
+                        break;
+                }
+
+                if (!isValid) {
+                    console.log(`Validation failed for ${sectionId}. Failing fields: ${failingFields.join(', ')}`);
+                }
+
+                return { isValid, failingFields };
+            }
+
+            async function navigateSection(direction) {
+                const currentSectionId = sections[currentSectionIndex];
+
+                if (direction === 'next') {
+                    const { isValid, failingFields } = await validateSection(currentSectionId);
+                    if (!isValid) {
+                        alert(`Please correct the following fields in ${currentSectionId} section: ${failingFields.join(', ')}`);
+                        return;
+                    }
+                }
+
+                document.getElementById(currentSectionId).classList.remove('active');
+                currentSectionIndex += direction === 'next' ? 1 : -1;
+                const newSectionId = sections[currentSectionIndex];
+                document.getElementById(newSectionId).classList.add('active');
+
+                prevBtn.style.display = currentSectionIndex > 0 ? 'inline-block' : 'none';
+                nextBtn.style.display = currentSectionIndex < sections.length - 1 && currentSectionIndex > 0 ? 'inline-block' : 'none';
+                submitBtn.style.display = currentSectionIndex === sections.length - 1 ? 'inline-block' : 'none';
+            }
+
+            prevBtn.addEventListener('click', () => navigateSection('prev'));
+            nextBtn.addEventListener('click', () => navigateSection('next'));
+            personalNextBtn.addEventListener('click', () => navigateSection('next'));
+
+            othersCheckbox.addEventListener('change', function() {
+                additionalAssetsContainer.style.display = this.checked ? 'block' : 'none';
+                if (!this.checked) {
+                    document.getElementById('additionalAssets').value = '';
+                    showError('additionalAssets', false);
+                }
+            });
+
+            const projectDocUpload = document.getElementById('projectDocUpload');
+            const projectDocsInput = document.getElementById('projectDocs');
+
+            projectDocUpload.addEventListener('click', () => {
+                projectDocsInput.click();
+            });
+
+            projectDocsInput.addEventListener('change', (e) => {
+                handleFileUpload(e.target.files);
+            });
+
+            projectDocUpload.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                projectDocUpload.style.backgroundColor = '#f0f0f0';
+            });
+
+            projectDocUpload.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+                projectDocUpload.style.backgroundColor = 'transparent';
+            });
+
+            projectDocUpload.addEventListener('drop', (e) => {
+                e.preventDefault();
+                projectDocUpload.style.backgroundColor = 'transparent';
+                handleFileUpload(e.dataTransfer.files);
+            });
+
+            async function handleFileUpload(files) {
+                for (const file of Array.from(files)) {
+                    if (uploadedFiles.projectDocs.length >= 5) {
+                        alert('Maximum of 5 files allowed');
+                        return;
+                    }
+
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert(`File ${file.name} exceeds 5MB limit`);
+                        return;
+                    }
+
+                    const allowedTypes = [
+                        'application/pdf',
+                        'application/msword',
+                        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                        'text/plain',
+                        'image/jpeg',
+                        'image/png'
+                    ];
+                    if (!allowedTypes.includes(file.type)) {
+                        alert(`Invalid file type for ${file.name}. Allowed types: PDF, DOC, DOCX, TXT, JPG, PNG`);
+                        return;
+                    }
+
+                    try {
+                        const base64Content = await new Promise((resolve, reject) => {
+                            const reader = new FileReader();
+                            reader.onload = () => resolve(reader.result);
+                            reader.onerror = reject;
+                            reader.readAsDataURL(file);
+                        });
+
+                        uploadedFiles.projectDocs.push({
+                            name: file.name,
+                            size: file.size,
+                            type: file.type,
+                            content: base64Content,
+                            file: file // Store raw file for FormData
+                        });
+
+                        const fileItem = document.createElement('div');
+                        fileItem.innerHTML = `
+                            ${file.name} (${(file.size / 1024).toFixed(2)} KB)
+                            <span class="remove-file" data-filename="${file.name}">✖</span>
+                        `;
+
+                        const removeBtn = fileItem.querySelector('.remove-file');
+                        removeBtn.addEventListener('click', () => {
+                            uploadedFiles.projectDocs = uploadedFiles.projectDocs.filter(
+                                f => f.name !== file.name
+                            );
+                            projectDocsList.removeChild(fileItem);
+                            const projectDocsValid = validations.projectDocs();
+                            showError('projectDocs', !projectDocsValid);
+                        });
+
+                        projectDocsList.appendChild(fileItem);
+
+                        if (uploadedFiles.projectDocs.length > 0) {
+                            showError('projectDocs', false);
+                        }
+                    } catch (error) {
+                        console.error('Error reading file:', error);
+                        alert(`Error processing file ${file.name}. Please try again.`);
+                    }
+                }
+            }
+
+            // Helper function to convert base64 to Blob
+            function dataURLtoBlob(dataurl) {
+                const arr = dataurl.split(',');
+                const mime = arr[0].match(/:(.*?);/)[1];
+                const bstr = atob(arr[1]);
+                let n = bstr.length;
+                const u8arr = new Uint8Array(n);
+                while (n--) {
+                    u8arr[n] = bstr.charCodeAt(n);
+                }
+                return new Blob([u8arr], { type: mime });
+            }
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                const failingSections = [];
+                for (const section of sections) {
+                    const { isValid, failingFields } = await validateSection(section);
+                    if (!isValid) {
+                        failingSections.push(`${section}: ${failingFields.join(', ')}`);
+                    }
+                }
+
+                if (failingSections.length === 0) {
+                    const formData = new FormData();
+                    const submissionData = {
+                        personalInfo: {
+                            fullName: document.getElementById('fullName').value,
+                            empId: document.getElementById('empId').value,
+                            position: document.getElementById('position').value,
+                            department: document.getElementById('department').value,
+                            lastDay: document.getElementById('lastDay').value,
+                            contactNumber: document.getElementById('contactNumber').value,
+                            personalEmail: document.getElementById('personalEmail').value
+                        },
+                        projectDetails: {
+                            activeProjects: document.getElementById('activeProjects').value,
+                            handoverPerson: document.getElementById('handoverPerson').value,
+                            projectDocs: uploadedFiles.projectDocs.map(file => ({
+                                name: file.name,
+                                size: file.size,
+                                type: file.type
+                            }))
+                        },
+                        assets: {
+                            hardware: Array.from(document.querySelectorAll('input[name="assets"]:checked'))
+                                .map(checkbox => checkbox.id),
+                            additionalAssets: document.getElementById('additionalAssets').value
+                        },
+                        documentation: {
+                            repositories: document.getElementById('repositories').value,
+                            accessCredentials: document.getElementById('accessCredentials').value,
+                            knowledgeBase: document.getElementById('knowledgeBase').value,
+                            dataPrivacyConsent: document.getElementById('dataPrivacyConsent').checked
+                        },
+                        submissionDetails: {
+                            submissionDate: new Date().toISOString(),
+                            status: 'Pending',
+                            submissionId: `OFF-${Date.now()}`
+                        }
+                    };
+
+                    // Append JSON data
+                    formData.append('personalInfo', JSON.stringify(submissionData.personalInfo));
+                    formData.append('projectDetails', JSON.stringify(submissionData.projectDetails));
+                    formData.append('assets', JSON.stringify(submissionData.assets));
+                    formData.append('documentation', JSON.stringify(submissionData.documentation));
+                    formData.append('submissionDetails', JSON.stringify(submissionData.submissionDetails));
+
+                    // Append files
+                    uploadedFiles.projectDocs.forEach(file => {
+                        formData.append('projectDocs', file.file, file.name);
+                    });
+
+                    try {
+                        const response = await fetch('http://localhost:3000/api/offboarding/submit', {
+                            method: 'POST',
+                            body: formData
+                        });
+                        const result = await response.json();
+
+                        if (response.ok) {
+                            const confirmationMessage = `
+                                Offboarding Submission Successful!
+                                
+                                Submission Details:
+                                - Submission ID: ${submissionData.submissionDetails.submissionId}
+                                - Employee Name: ${submissionData.personalInfo.fullName}
+                                - Employee ID: ${submissionData.personalInfo.empId}
+                                - Last Working Day: ${submissionData.personalInfo.lastDay}
+                                
+                                Thank you for completing the offboarding process.
+                                HR will review your submission shortly.
+                            `;
+                            alert(confirmationMessage);
+
+                            form.reset();
+                            uploadedFiles.projectDocs = [];
+                            document.getElementById('projectDocsList').innerHTML = '';
+                            additionalAssetsContainer.style.display = 'none';
+
+                            while (currentSectionIndex > 0) {
+                                navigateSection('prev');
+                            }
+                        } else {
+                            alert(`Error: ${result.error}`);
+                        }
+                    } catch (error) {
+                        console.error('Error submitting form:', error);
+                        alert('Failed to submit offboarding form. Please try again.');
+                    }
+                } else {
+                    alert(`Please complete all sections correctly. Issues found in:\n${failingSections.join('\n')}`);
+                }
+            });
+
+            const validationFields = [
+                'fullName', 'empId', 'position', 'department', 'lastDay',
+                'contactNumber', 'personalEmail', 'activeProjects',
+                'handoverPerson', 'repositories', 'accessCredentials',
+                'knowledgeBase', 'additionalAssets'
+            ];
+
+            validationFields.forEach(field => {
+                const input = document.getElementById(field);
+                if (input) {
+                    input.addEventListener('input', async () => {
+                        const value = input.value.trim();
+                        const isValid = field === 'empId' || field === 'contactNumber' || field === 'personalEmail' || field === 'lastDay'
+                            ? await validations[field](value)
+                            : validations[field](value);
+                        let errorMessage = '';
+                        if (!isValid && field === 'empId' && await checkForDuplicates('empId', value)) {
+                            errorMessage = 'This Employee ID is already used.';
+                        } else if (!isValid && field === 'contactNumber' && await checkForDuplicates('contactNumber', value)) {
+                            errorMessage = 'This Contact Number is already used.';
+                        } else if (!isValid && field === 'personalEmail' && await checkForDuplicates('personalEmail', value)) {
+                            errorMessage = 'This Email Address is already used.';
+                        }
+                        showError(field, value && !isValid, errorMessage);
+                    });
+                }
+            });
+
+            document.getElementById('dataPrivacyConsent').addEventListener('change', function() {
+                showError('dataPrivacyConsent', !this.checked);
+            });
+
+            document.getElementById('contactNumber').addEventListener('input', function(e) {
+                this.value = this.value.replace(/\D/g, '');
+                if (this.value.length > 10) {
+                    this.value = this.value.slice(0, 10);
+                }
+            });
+
+            document.getElementById('empId').addEventListener('input', function(e) {
+                this.value = this.value.toUpperCase();
+                this.value = this.value.replace(/[^A-Z0-9]/g, '').slice(0, 7);
+                if (!this.value.startsWith('ATS0')) {
+                    this.value = 'ATS0' + this.value.replace('ATS0', '');
+                }
+            });
+
+            document.getElementById('personalEmail').addEventListener('input', function(e) {
+                let value = this.value.toLowerCase();
+                const atIndex = value.indexOf('@');
+                let localPart = atIndex !== -1 ? value.substring(0, atIndex) : value;
+                let domainPart = atIndex !== -1 ? value.substring(atIndex) : '';
+
+                localPart = localPart.replace(/[^a-zA-Z0-9_.]/g, '');
+                if (localPart.length > 25) {
+                    localPart = localPart.slice(0, 25);
+                }
+
+                localPart = localPart.replace(/[_]{2,}/g, '_').replace(/\.\.+/g, '.');
+                if (/[_][.]|[.][_]/.test(localPart)) {
+                    localPart = localPart.replace(/[_][.]|[.][_]/g, localPart.includes('_') ? '_' : '.');
+                }
+
+                if (domainPart) {
+                    let domain = domainPart.slice(1);
+                    if (domainPart === '@') {
+                        domainPart = '@';
+                    } else if (domain.startsWith('gmail.com')) {
+                        domainPart = '@gmail.com';
+                    } else if (domain.startsWith('yahoo.com')) {
+                        domainPart = '@yahoo.com';
+                    } else if (domain.startsWith('outlook.com')) {
+                        domainPart = '@outlook.com';
+                    } else if (domain.startsWith('gmail')) {
+                        domainPart = '@gmail' + domain.slice(5).replace(/[^.com]/g, '');
+                    } else if (domain.startsWith('yahoo')) {
+                        domainPart = '@yahoo' + domain.slice(5).replace(/[^.com]/g, '');
+                    } else if (domain.startsWith('outlook')) {
+                        domainPart = '@outlook' + domain.slice(7).replace(/[^.com]/g, '');
+                    } else {
+                        domain = domain.replace(/[^a-z.]/g, '');
+                        if (domain.startsWith('g') || domain.startsWith('y') || domain.startsWith('o')) {
+                            domainPart = '@' + domain;
+                        } else {
+                            domainPart = '@';
+                        }
+                    }
+                }
+
+                this.value = localPart + domainPart;
+
+                const isValid = validations.personalEmail(this.value);
+                let errorMessage = isValid ? '' : checkForDuplicates('personalEmail', this.value) ? 'This Email Address is already used.' : '';
+                showError('personalEmail', this.value && !isValid, errorMessage);
+            });
+
+            document.getElementById('personalEmail').addEventListener('keypress', function(e) {
+                const value = this.value;
+                const cursorPos = this.selectionStart;
+                const localPart = value.includes('@') ? value.split('@')[0] : value;
+
+                if (e.key === '@') {
+                    const alphaNumCount = localPart.replace(/[^a-zA-Z0-9]/g, '').length;
+                    if (!value.includes('@') && localPart.length <= 25 && alphaNumCount >= 5) {
+                        return;
+                    } else {
+                        e.preventDefault();
+                        return;
+                    }
+                }
+
+                if (/[_][.]|[.][_]/.test(value.substring(0, cursorPos) + e.key + value.substring(cursorPos))) {
+                    e.preventDefault();
+                    return;
+                }
+
+                if (
+                    (value[cursorPos - 1] === '_' && e.key === '_') ||
+                    (value[cursorPos - 1] === '.' && e.key === '.') ||
+                    (value[cursorPos - 1] === '_' && e.key === '.') ||
+                    (value[cursorPos - 1] === '.' && e.key === '_')
+                ) {
+                    e.preventDefault();
+                    return;
+                }
+
+                if (
+                    (value.startsWith('@gmail.com', cursorPos - 10) && value.length >= cursorPos + 10) ||
+                    (value.startsWith('@yahoo.com', cursorPos - 10) && value.length >= cursorPos + 10) ||
+                    (value.startsWith('@outlook.com', cursorPos - 12) && value.length >= cursorPos + 12)
+                ) {
+                    e.preventDefault();
+                }
+            });
+
+            ['fullName', 'position', 'department', 'handoverPerson'].forEach(field => {
+                const input = document.getElementById(field);
+                input.addEventListener('input', function(e) {
+                    const start = this.selectionStart;
+                    let value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                    value = value.replace(/\s+/g, ' ').trimStart();
+                    this.value = value;
+                    const newPos = start - (this.value.length - value.length);
+                    this.setSelectionRange(Math.max(0, newPos), Math.max(0, newPos));
+                    if (!validations.hasAlphabeticChar(this.value)) {
+                        this.value = this.value.replace(/\s/g, '');
+                    }
+                });
+
+                input.addEventListener('keypress', function(e) {
+                    const value = this.value;
+                    const cursorPos = this.selectionStart;
+                    if (e.key === ' ' && value[cursorPos - 1] === ' ') {
+                        e.preventDefault();
+                    }
+                });
+            });
+
+            ['activeProjects', 'repositories', 'accessCredentials', 'knowledgeBase'].forEach(field => {
+                const textarea = document.getElementById(field);
+                if (textarea) {
+                    textarea.addEventListener('input', function() {
+                        const start = this.selectionStart;
+                        let value = this.value.replace(/\s+/g, ' ').trimStart();
+                        this.value = value;
+                        const newPos = start - (this.value.length - value.length);
+                        this.setSelectionRange(Math.max(0, newPos), Math.max(0, newPos));
+                        if (!validations.hasAlphabeticChar(this.value)) {
+                            this.value = this.value.replace(/\s/g, '');
+                        }
+                    });
+
+                    textarea.addEventListener('keypress', function(e) {
+                        const value = this.value;
+                        const cursorPos = this.selectionStart;
+                        if (e.key === ' ' && value[cursorPos - 1] === ' ') {
+                            e.preventDefault();
+                        }
+                    });
+                }
+            });
+
+            const additionalAssetsTextarea = document.getElementById('additionalAssets');
+            additionalAssetsTextarea.addEventListener('input', function(e) {
+                const start = this.selectionStart;
+                let value = this.value;
+
+                value = value.replace(/[^a-zA-Z\s]/g, '');
+                value = value.replace(/\s+/g, ' ').trimStart();
+
+                if (!validations.hasAlphabeticChar(value)) {
+                    value = value.replace(/\s/g, '');
+                }
+
+                this.value = value;
+
+                const newPos = start - (this.value.length - value.length);
+                this.setSelectionRange(Math.max(0, newPos), Math.max(0, newPos));
+
+                const isValid = validations.additionalAssets(this.value);
+                showError('additionalAssets', !isValid);
+            });
+
+            additionalAssetsTextarea.addEventListener('keypress', function(e) {
+                const value = this.value;
+                const cursorPos = this.selectionStart;
+
+                if (e.key === ' ' && value[cursorPos - 1] === ' ') {
+                    e.preventDefault();
+                    return;
+                }
+
+                if (e.key === ' ' && !validations.hasAlphabeticChar(value)) {
+                    e.preventDefault();
+                    return;
+                }
+            });
+
+            projectDocsInput.addEventListener('change', function(e) {
+                const allowedTypes = [
+                    'application/pdf',
+                    'application/msword',
+                    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                    'text/plain',
+                    'image/jpeg',
+                    'image/png'
+                ];
+
+                Array.from(this.files).forEach(file => {
+                    if (!allowedTypes.includes(file.type)) {
+                        alert(`Invalid file type for ${file.name}. Allowed types: PDF, DOC, DOCX, TXT, JPG, PNG`);
+                        this.value = '';
+                        return;
+                    }
+
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert(`${file.name} exceeds 5MB limit`);
+                        this.value = '';
+                    }
+                });
+            });
+
+            lastDayInput.addEventListener('input', function(e) {
+                let value = this.value;
+                const isValid = validations.lastDay(value);
+                showError('lastDay', value && !isValid);
+            });
+
+            lastDayInput.addEventListener('blur', function() {
+                const value = this.value;
+                if (!value) {
+                    showError('lastDay', true);
+                    return;
+                }
+                const isValid = validations.lastDay(value);
+                showError('lastDay', !isValid);
+                if (!isValid && value) {
+                    this.focus();
+                }
+            });
+
+            ['repositories', 'accessCredentials', 'knowledgeBase', 'activeProjects', 'additionalAssets'].forEach(field => {
+                const textarea = document.getElementById(field);
+                if (textarea) {
+                    const textareaContainer = document.createElement('div');
+                    textareaContainer.style.position = 'relative';
+                    textareaContainer.style.width = '100%';
+                    textarea.parentNode.insertBefore(textareaContainer, textarea);
+                    textareaContainer.appendChild(textarea);
+
+                    const charCounter = document.createElement('span');
+                    charCounter.classList.add('char-counter');
+                    charCounter.style.position = 'absolute';
+                    charCounter.style.bottom = '5px';
+                    charCounter.style.right = '10px';
+                    charCounter.style.fontSize = '0.75em';
+                    charCounter.style.color = '#666';
+                    charCounter.style.pointerEvents = 'none';
+                    charCounter.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+                    charCounter.style.padding = '2px 5px';
+                    charCounter.style.borderRadius = '3px';
+
+                    textareaContainer.appendChild(charCounter);
+
+                    function updateCharCount() {
+                        const maxLength = parseInt(textarea.getAttribute('maxlength'));
+                        const currentLength = textarea.value.length;
+                        charCounter.textContent = `${currentLength}/${maxLength}`;
+                        if (currentLength > maxLength * 0.8) {
+                            charCounter.style.color = '#e74c3c';
+                        } else {
+                            charCounter.style.color = '#666';
+                        }
+                    }
+
+                    updateCharCount();
+                    textarea.addEventListener('input', updateCharCount);
+                    textarea.addEventListener('focus', updateCharCount);
+                    textarea.style.paddingBottom = '25px';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
