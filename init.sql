@@ -1,9 +1,3 @@
--- Create database
-CREATE DATABASE offboarding_db;
-
--- Connect to the database
-\c offboarding_db
-
 -- Create employee_info table
 CREATE TABLE employee_info (
     id SERIAL PRIMARY KEY,

@@ -11,7 +11,7 @@ const port = 3010;
 const pool = new Pool({
     user: 'postgres',
     host: 'postgres',
-    database: 'offboarding_db',
+    database: 'offboarding_db1',
     password: 'admin123',
     port: 5432,
 });

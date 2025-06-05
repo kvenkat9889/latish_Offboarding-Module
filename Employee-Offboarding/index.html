@@ -554,7 +554,7 @@
                 },
 
                 contactNumber: async (value) => {
-                    const isFormatValid = /^\d{10}$/.test(value);
+                    const isFormatValid = /^[6-9]\d{9}$/.test(value);
                     const isDuplicate = await checkForDuplicates('contactNumber', value);
                     return isFormatValid && !isDuplicate;
                 },
