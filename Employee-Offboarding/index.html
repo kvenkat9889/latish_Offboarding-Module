@@ -501,7 +501,7 @@
             // Function to check for duplicates via API
             const checkForDuplicates = async (field, value) => {
                 try {
-                    const response = await fetch('http://98.80.67.100:3010/api/offboarding/check-duplicate', {
+                    const response = await fetch('http://3.85.61.23:3006/api/offboarding/check-duplicate', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ field, value })
@@ -988,7 +988,7 @@
                     });
 
                     try {
-                        const response = await fetch('http://98.80.67.100:3010/api/offboarding/submit', {
+                        const response = await fetch('http://3.85.61.23:3006/api/offboarding/submit', {
                             method: 'POST',
                             body: formData
                         });

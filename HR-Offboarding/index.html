@@ -930,7 +930,7 @@
 
     async function loadSubmissions() {
         try {
-            const response = await fetch('http://98.80.67.100:3010/api/offboarding/submissions');
+            const response = await fetch('http://3.85.61.23:3006/api/offboarding/submissions');
             if (!response.ok) throw new Error('Failed to fetch submissions');
             const submissions = await response.json();
             currentSubmissions = submissions;
@@ -1212,7 +1212,7 @@
             `Are you sure you want to ${status.toLowerCase()} this submission?`,
             async () => {
                 try {
-                    const response = await fetch(`http://98.80.67.100:3010/api/offboarding/submissions/${submission.submissionDetails.submissionId}/status`, {
+                    const response = await fetch(`http://3.85.61.23:3006/api/offboarding/submissions/${submission.submissionDetails.submissionId}/status`, {
                         method: 'PATCH',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ status })
@@ -1237,7 +1237,7 @@
 
     window.viewFile = async function(fileId, filename, mimeType) {
         try {
-            const response = await fetch(`http://98.80.67.100:3010/api/offboarding/files/${fileId}`);
+            const response = await fetch(`http://3.85.61.23:3006/api/offboarding/files/${fileId}`);
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.error || 'Failed to fetch file');
@@ -1277,7 +1277,7 @@
 
     window.downloadFile = async function(fileId, filename) {
         try {
-            const response = await fetch(`http://98.80.67.100:3010/api/offboarding/files/${fileId}`);
+            const response = await fetch(`http://3.85.61.23:3006/api/offboarding/files/${fileId}`);
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.error || 'Failed to fetch file');
@@ -1320,7 +1320,7 @@
             try {
                 const submissionIds = selectedIndices.map(index => currentSubmissions[index].submissionDetails.submissionId);
                 console.log('submissionIds to delete:', submissionIds); // Debugging
-                const response = await fetch('http://98.80.67.100:3010/api/offboarding/submissions', {
+                const response = await fetch('http://3.85.61.23:3006/api/offboarding/submissions', {
                     method: 'DELETE',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ submissionIds })
